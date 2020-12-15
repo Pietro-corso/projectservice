@@ -4,13 +4,11 @@ import java.util.List;
 
 import it.studio.spring.serviziorest.dto.CorsistaDTO;
 
-
-
 public interface CorsistaService {
-	CorsistaDTO getCorsistaId(long id);
-	void inserisciCorsista(CorsistaDTO dto);
-	void aggiornaCorsista(long id,CorsistaDTO dto);
-    void cancellaCorsista(long id);
-    List<CorsistaDTO> listaCorsisti();
+	CorsistaDTO getEntityById(long id);
+	CorsistaDTO insertEntity(CorsistaDTO dto);
+	CorsistaDTO updateEntity(CorsistaDTO dto);	
+	void deleteEntity(long id);
+    List<CorsistaDTO> searchAllEntity();
 
 }

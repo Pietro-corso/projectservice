@@ -1,15 +1,13 @@
 package it.studio.spring.serviziorest.service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import it.studio.spring.serviziorest.dto.CorsistaDTO;
 import it.studio.spring.serviziorest.entita.Corsista;
@@ -18,92 +16,130 @@ import it.studio.spring.serviziorest.repository.CorsistaRepository;
 @Service
 public class CorsistaServiceImpl implements CorsistaService{
 	@Autowired
-	public CorsistaRepository corep;
+	private CorsistaRepository corsistaRepository;
+	/**
+	 * metodo che torna il dto del corsista 
+	 * ricercato
+	 * id valore chiave 
+	 */
+	private static final Logger log = LoggerFactory.getLogger(CorsistaServiceImpl.class);
 
-	@Override
-	public ResponseEntity<CorsistaDTO> getCorsistaId(long id) {
-		// TODO Auto-generated method stub
-		System.out.println("valore è "+id);
-		Optional<Corsista> ricercato = corep.findById(id);
 
-		if (ricercato.isEmpty()) {		
-
-			return new ResponseEntity<>(ricercato.get(), HttpStatus.OK);
-
-		}else
-		{
-			System.out.println("senza valore");
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-	}
-
-	@Override
-	public ResponseEntity<?> inserisciCorsista(String nome, String cognome) {
-		// TODO Auto-generated method stub
+	public CorsistaDTO getEntityById(long id) {
+		// TODO Auto-generated method stub	
+		CorsistaDTO dto = new CorsistaDTO();
 		try {
-			System.out.println("step 2");
-			Corsista allievo = 
-					corep.save(new Corsista(nome,cognome,LocalDate.now()));
-			return new ResponseEntity<>(allievo, HttpStatus.CREATED);
 
+			dto = corsistaRepository.findById(id).map(a -> convertiEntitaInDto(a)).get();
+			dto.setEsisto_response("FOUND");
 		}catch(Exception e) {
-
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			log.info(e.getMessage());
+			dto.setEsisto_response("ERROR");
 		}
-
+		return dto;
 	}
-	
-	public List<CorsistaDTO> listaCorsisti() {
-		try {
-			System.out.println("*********** è questo");
-			List<CorsistaDTO> corsisti = new ArrayList<CorsistaDTO>();
-
-
-			var it = corep.findAll();
-
-			it.forEach(action);
-			
-			if (corsisti.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-
-			return new ResponseEntity<>(corsisti, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
+	/**
+	 * metodo che inserisce un corista
+	 * i valori del dto passato memorizzati
+	 * 
+	 */
 	@Override
-	public void  aggiornaCorsista(long id, String nome, String cognome) {
-
-		System.out.println("step put");
-		Optional<Corsista> trovato = corep.findById(id);
-
-		if (trovato.isPresent()) {
-			Corsista allievo = trovato.get();
-			allievo.setCognome(cognome);
-			allievo.setNome(nome);
-			return new ResponseEntity<>(corep.save(allievo), HttpStatus.OK);
-
-		}else
-		{
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-
-	}
-
-	@Override
-	public HttpStatus cancellaCorsista(long id) {
+	public CorsistaDTO insertEntity(CorsistaDTO requestDTO) {
 		// TODO Auto-generated method stub
-		try {
-			corep.deleteById(id);
-			return HttpStatus.NO_CONTENT;
-		} catch (Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
+		CorsistaDTO dto = new CorsistaDTO();
+
+		try {			     
+			Corsista entita = convertiDtoInEntita(requestDTO);
+			corsistaRepository.save(entita);
+
+			dto = getEntityById(entita.getId());
+			dto.setEsisto_response("Inserimento effettuato con successo");
+		}catch(Exception e) {
+			log.info(e.getMessage());			
+			dto.setEsisto_response("ERROR");
 		}
+		return dto;
 	}
+
+	@Override
+	public CorsistaDTO updateEntity(CorsistaDTO requestDTO) {
+		// TODO Auto-generated method stub
+		CorsistaDTO dto = new CorsistaDTO();
+		Corsista entita = convertiDtoInEntita(requestDTO);
+
+		try {			     
+			corsistaRepository.save(entita);
+
+			dto = getEntityById(entita.getId());
+			dto.setEsisto_response("Dati aggiornati con successo");
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			dto.setEsisto_response("ERROR");
+		}
+		return dto;
+	}
+
+
+	@Override
+	public void deleteEntity(long id) {
+		// TODO Auto-generated method stub
+		corsistaRepository.deleteById(id);
+	}
+
+
+	@Override
+	public List<CorsistaDTO> searchAllEntity() {
+		// TODO Auto-generated method stub
+		List<Corsista> allEntity = new ArrayList<>();
+		List<CorsistaDTO> allDTO = new ArrayList<>();
+
+		try {
+			corsistaRepository.findAll().forEach(entita -> allEntity.add(entita));
+			allDTO = allEntity.stream()
+					.map(a -> convertiEntitaInDto(a))
+					.collect(Collectors.toList());
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			allDTO.clear();
+		}
+		return allDTO;
+
+	}
+
+	/**
+	 * passo i dati da entita a dto
+	 * @param corsista
+	 * @return
+	 */
+	private CorsistaDTO convertiEntitaInDto(Corsista corsista) {
+
+		CorsistaDTO dto = new CorsistaDTO();
+
+		dto.setId(corsista.getId());
+		dto.setCognome(corsista.getCognome());
+		dto.setNome(corsista.getNome());    
+		dto.setDateOfBirth(corsista.getDateOfBirth());
+
+		return dto;
+	}
+	/**
+	 * passo dati da dto a entita
+	 * @param corsista
+	 * @return
+	 */
+	private Corsista convertiDtoInEntita(CorsistaDTO dto) {
+
+		Corsista entita = new Corsista();
+		// 
+		if (dto.getId()!=null) entita.setId(dto.getId());
+
+		entita.setCognome(dto.getCognome());
+		entita.setNome(dto.getNome());    	
+		entita.setDateOfBirth(dto.getDateOfBirth());
+
+		return entita;
+	}
+
 
 
 }

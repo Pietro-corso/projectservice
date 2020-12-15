@@ -3,22 +3,41 @@ package it.studio.spring.serviziorest.dto;
 import java.time.LocalDate;
 
 public class CorsistaDTO {
-	
 
-	private String nome;
-	private long id;
+	private Long Id;
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+	private String nome;	
 	private String cognome;
-	private LocalDate data_assunzione;
-	
+	private String esisto_response;
+	private LocalDate dateOfBirth;
+
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getEsisto_response() {
+		return esisto_response;
+	}
+
+	public void setEsisto_response(String esisto_response) {
+		this.esisto_response = esisto_response;
+	}
+
 	public CorsistaDTO() {
 		super();
 	}
-	public CorsistaDTO(String nome, String cognome, LocalDate data_assunzione) {
-		
-		this.nome = nome;
-		this.cognome = cognome;
-		this.data_assunzione = data_assunzione;
-	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -31,14 +50,6 @@ public class CorsistaDTO {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-    public LocalDate getData_assunzione() {
-		return data_assunzione;
-	}
-	public void setData_assunzione(LocalDate data_assunzione) {
-		this.data_assunzione = data_assunzione;
-	}
-	public long getId() {
-		return id;
-	}
-	
+
+
 }
