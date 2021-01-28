@@ -31,6 +31,9 @@ public class CorsistaController {
 	public ResponseEntity<CorsistaDTO> findEntityById(@PathVariable("id") long id){
 
 		CorsistaDTO response = corservice.getEntityById(id);
+		/**
+		 * aggiunto commento al CorsistaController
+		 */
 
 		if (response.getEsisto_response().equals("ERROR")) {
 			return	new ResponseEntity<>(HttpStatus.NOT_FOUND);
