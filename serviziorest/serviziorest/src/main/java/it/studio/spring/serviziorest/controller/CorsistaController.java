@@ -28,6 +28,11 @@ public class CorsistaController {
 	@Autowired
 	private CorsistaService corservice;
 /** attenzione variazione da remoto
+ * dfd
+ * fd
+ * fd
+ * fd
+ * f
 */
 
 	@GetMapping("/corsista/{id}")
