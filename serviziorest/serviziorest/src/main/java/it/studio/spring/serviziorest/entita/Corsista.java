@@ -27,6 +27,7 @@ public class Corsista {
     private LocalDate dateOfBirth;
     /**
      * modificato
+     * cccc
      * @return
      */
     
