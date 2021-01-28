@@ -27,7 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CorsistaController {
 	@Autowired
 	private CorsistaService corservice;
-
+/** attenzione variazione da remoto
+*/
 
 	@GetMapping("/corsista/{id}")
 	public ResponseEntity<CorsistaDTO> findEntityById(@PathVariable("id") long id){
