@@ -47,6 +47,8 @@ public class CorsistaController {
 		 * aggiunto commento al CorsistaController
 		 * aggiunto 2 commento da locale
 		 * aggiunto 3 commento da locale
+		 * 
+		 * pppppp
 		 */
 		log.info("Viene ricercato il corsista con id...");
 		if (response.getEsisto_response().equals("ERROR")) {
