@@ -10,6 +10,7 @@ public class CorsistaDTO {
 	}
 /**
  * aggiunto altro commento in dto
+ * *****
  * @param id
  */
 	public void setId(Long id) {
