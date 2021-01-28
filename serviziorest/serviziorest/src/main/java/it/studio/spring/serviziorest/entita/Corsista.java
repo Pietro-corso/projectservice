@@ -25,6 +25,10 @@ public class Corsista {
 	private String nome;
     @Column(nullable = false)     
     private LocalDate dateOfBirth;
+    /**
+     * modificato
+     * @return
+     */
     
     public LocalDate getDateOfBirth() {
 		return dateOfBirth;
