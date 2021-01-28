@@ -8,7 +8,13 @@ public class CorsistaDTO {
 	public Long getId() {
 		return Id;
 	}
-
+/**
+ * aggiunto altro commento in dto
+ * *****
+ * 
+ * lllll
+ * @param id
+ */
 	public void setId(Long id) {
 		Id = id;
 	}

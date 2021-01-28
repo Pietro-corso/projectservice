@@ -20,11 +20,29 @@ public class Corsista {
 
 	@Column(nullable = false)
 	private String cognome;	
-
-	@Column(nullable = false)
+/****
+ * 
+ * 
+ * lklklklklklkl
+ * llllll
+ * 
+ * sssss
+ * 
+ */
+	
 	private String nome;
     @Column(nullable = false)     
     private LocalDate dateOfBirth;
+    /**
+     * modificato
+     * cccc
+     * ffff
+     * pppp
+     * 
+     * 
+     * òòò
+     * @return
+     */
     
     public LocalDate getDateOfBirth() {
 		return dateOfBirth;

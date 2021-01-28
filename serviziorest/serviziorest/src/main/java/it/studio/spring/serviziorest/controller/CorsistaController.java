@@ -19,13 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.studio.spring.serviziorest.dto.CorsistaDTO;
 import it.studio.spring.serviziorest.service.CorsistaService;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/corso")
+@Slf4j
 public class CorsistaController {
 	@Autowired
 	private CorsistaService corservice;
-
+/** attenzione variazione da remoto
+ * dfd
+ * fd
+ * fd
+ * fd
+ * f
+ * ccccc
+*/
 
 	@GetMapping("/corsista/{id}")
 	public ResponseEntity<CorsistaDTO> findEntityById(@PathVariable("id") long id){
@@ -33,7 +42,19 @@ public class CorsistaController {
  * modificato
  */
 		CorsistaDTO response = corservice.getEntityById(id);
-
+		/**
+		* terzo commento da remoto
+		* aggiunto secondo commento da remoto
+		* aggiunto da remoto
+		 * aggiunto commento al CorsistaController
+		 * aggiunto 2 commento da locale
+		 * aggiunto 3 commento da locale
+		 * 
+		 * pppppp
+		 * 
+		 * oooo
+		 */
+		log.info("Viene ricercato il corsista con id...");
 		if (response.getEsisto_response().equals("ERROR")) {
 			return	new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}else {
