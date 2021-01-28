@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.studio.spring.serviziorest.dto.CorsistaDTO;
 import it.studio.spring.serviziorest.service.CorsistaService;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/corso")
+@Slf4j
 public class CorsistaController {
 	@Autowired
 	private CorsistaService corservice;
@@ -37,7 +39,7 @@ public class CorsistaController {
 		 * aggiunto commento al CorsistaController
 		 * aggiunto 2 commento da locale
 		 */
-
+		log.info("Viene ricercato il corsista con id...");
 		if (response.getEsisto_response().equals("ERROR")) {
 			return	new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}else {
