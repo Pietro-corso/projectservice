@@ -20,8 +20,15 @@ public class Corsista {
 
 	@Column(nullable = false)
 	private String cognome;	
-
-	@Column(nullable = false)
+/****
+ * 
+ * 
+ * 
+ * 
+ * sssss
+ * 
+ */
+	
 	private String nome;
     @Column(nullable = false)     
     private LocalDate dateOfBirth;
