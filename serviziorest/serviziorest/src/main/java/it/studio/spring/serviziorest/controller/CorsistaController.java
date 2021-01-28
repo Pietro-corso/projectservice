@@ -32,6 +32,7 @@ public class CorsistaController {
 
 		CorsistaDTO response = corservice.getEntityById(id);
 		/**
+		* aggiunto secondo commento da remoto
 		* aggiunto da remoto
 		 * aggiunto commento al CorsistaController
 		 */
