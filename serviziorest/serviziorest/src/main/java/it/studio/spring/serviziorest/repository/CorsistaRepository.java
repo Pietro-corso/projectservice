@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import it.studio.spring.serviziorest.entita.Corsista;
 /***
  * 
- * @author E002097
- * pppp
+ * sono su feature Test Pc1 e modifico
+ * e committo
  * 
  *
  */
