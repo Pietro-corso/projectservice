@@ -29,7 +29,9 @@ public class CorsistaController {
 
 	@GetMapping("/corsista/{id}")
 	public ResponseEntity<CorsistaDTO> findEntityById(@PathVariable("id") long id){
-
+/**
+ * modificato
+ */
 		CorsistaDTO response = corservice.getEntityById(id);
 
 		if (response.getEsisto_response().equals("ERROR")) {
