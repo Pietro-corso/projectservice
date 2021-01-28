@@ -9,6 +9,7 @@ import it.studio.spring.serviziorest.entita.Corsista;
 /***
  * 
  * @author E002097
+ * pppp
  *
  */
 @Repository
