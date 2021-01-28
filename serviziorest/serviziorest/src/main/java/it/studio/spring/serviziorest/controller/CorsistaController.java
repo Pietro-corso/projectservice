@@ -34,6 +34,7 @@ public class CorsistaController {
 		/**
 		* aggiunto da remoto
 		 * aggiunto commento al CorsistaController
+		 * aggiunto 2 commento da locale
 		 */
 
 		if (response.getEsisto_response().equals("ERROR")) {
