@@ -33,6 +33,16 @@ public class Corsista {
 	private String nome;
     @Column(nullable = false)     
     private LocalDate dateOfBirth;
+    /**
+     * modificato
+     * cccc
+     * ffff
+     * pppp
+     * 
+     * 
+     * òòò
+     * @return
+     */
     
     public LocalDate getDateOfBirth() {
 		return dateOfBirth;
